@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SARIMA Forecasting</title>
+    <style>
+body {
+  background-color:#ffffe6;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "Open Sans", sans-serif;
+  color: #333333;
+
+}
+    .all-img{
+  border-color:white;
+  border-width: 2px;
+  display: inline-block;
+  box-shadow:0 1px 5px  rgba(0, 0,0, 0.25);
+  object-fit: cover;
+  margin-left: 480px;
+  margin-top:70px;
+  padding-left:20px;
+  padding-right:100px;
+  border-radius: 23px;
+  background-color:#04AA6D;
+}
+        .submitbutton
+        {
+          margin-left: 110px;
+          margin-bottom: 40px;
+          margin-top:29px;
+          border: none;
+          background-color:#282A35;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          padding-left: 30px;
+          padding-right: 30px;
+          border-radius: 23px;
+          color: white;
+          font-weight:bold;
+          box-shadow:0 1px 5px  rgba(0, 0,0, 0.25);
+          border-color: white;
+          cursor: pointer;
+          font-family:Times new Roman;
+        }
+
+   .select, input[type=number]{
+            margin-right: 28px;
+          margin-bottom: 12px;
+          border: none;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          padding-left: 15px;
+          padding-right: 15px;
+          border-radius: 4px;
+          color: black;
+          box-shadow:0 1px 5px  rgba(0, 0,0, 0.25);
+          border-color: black;
+          cursor: pointer;
+   }
+    .fileupload{
+
+
+          border: none;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          padding-left: 5px;
+          padding-right: 15px;
+          border-radius: 4px;
+          color: black;
+          box-shadow:0 1px 5px  rgba(0, 0,0, 0.25);
+          border-color: black;
+          cursor: pointer;
+    }
+    p{
+    font-family: Times new Roman;
+    font-weight:bold;
+
+    }
+    h1{
+    margin-left:560px;
+    color:#204060;
+    font-family: Times new Roman;
+
+    }
+
+.submitbutton1{
+          border: none;
+          background-color:#282A35;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          padding-left: 30px;
+          padding-right: 30px;
+          border-radius: 23px;
+          color: white;
+          font-weight:bold;
+          box-shadow:0 1px 5px  rgba(0, 0,0, 0.25);
+          border-color: white;
+          cursor: pointer;
+          font-family:Times new Roman;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Sales Prediction</h1>
+    <form class="all-img" action="{{ url_for('sarima') }}" method="POST" enctype="multipart/form-data">
+        <p>Upload CSV file</p>
+        <input class="fileupload" type="file" name="file" accept=".csv">
+        <br><br>
+        <p>Enter the types of period</p>
+        <select class="submitbutton1" name="interval_type" >
+            <option value="D">Daily</option>
+            <option value="W">Weekly</option>
+            <option value="M">Monthly</option>
+            <option value="Y">Yearly</option>
+        </select>
+        <br><br>
+        <p>Enter the period value</p>
+        <input class="intervalvalue" type="number" name="interval_value" min="1" max="100" required>
+        <br><br>
+        <input  class="submitbutton" type="submit" value="Submit">
+    </form>
+{% if forecast %}
+        <div>
+            {{ plot|safe }}
+        </div>
+{% endif %}
+
+</body>
+</html>
